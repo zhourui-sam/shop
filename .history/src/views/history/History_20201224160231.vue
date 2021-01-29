@@ -1,0 +1,50 @@
+<template>
+  <div>
+    <van-nav-bar title="最近浏览" :fixed="true" left-arrow @click-left="onClickLeft" :placeholder='true'/>
+    <div class="contain">
+      <div class='box' v-for="(item,index) in data" :key="index">
+        <div class='pic'>
+          <img :src="item.image">
+        </div>
+        <div class='text'>
+          <div class='name'>{{item.goodsName}}</div>
+          <div class='price'>
+            <div class='mallPrice'>￥{{item.mallPrice}}</div>
+            <div class='nowPrice'>{{item.price}}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+export default {
+  name: '',
+  props:{},
+  data () {
+    return {
+      data:[],
+    }
+  },
+  components: {},
+  methods: {
+    onClickLeft(){
+        this.$router.push('/mine')
+    },
+    getdata(){
+      this.data = JSON.parse(localStorage.getItem('adminbrowerHistory'))
+      console.log(this.data)
+    }
+  },
+  mounted() {
+    this.getdata()
+  },
+  computed: {},
+  watch: {}
+}
+</script>
+
+<style lang="scss" scoped>
+
+</style>

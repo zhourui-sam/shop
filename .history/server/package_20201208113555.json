@@ -1,0 +1,90 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "",
+  "private": true,
+  "dependencies": {
+    "cssnano": "^4.1.10",
+    "egg": "^2.2.1",
+    "egg-cors": "^2.1.2",
+    "egg-jwt": "^3.1.6",
+    "egg-mongoose": "^3.1.1",
+    "egg-scripts": "^2.5.0",
+    "egg-view-ejs": "^2.0.0",
+    "md5": "^2.2.1",
+    "mz-modules": "^2.1.0",
+    "postcss-aspect-ratio-mini": "^1.1.0",
+    "postcss-cssnext": "^3.1.0",
+    "postcss-import": "^13.0.0",
+    "postcss-px-to-viewport": "^1.1.1",
+    "postcss-url": "^10.1.1",
+    "postcss-viewport-units": "^0.1.6",
+    "postcss-write-svg": "^3.0.1",
+    "request": "^2.88.0",
+    "silly-datetime": "^0.1.2",
+    "svg-captcha": "^1.3.12"
+  },
+  "devDependencies": {
+    "autod": "^3.0.1",
+    "autod-egg": "^1.0.0",
+    "egg-bin": "^4.3.5",
+    "egg-ci": "^1.8.0",
+    "egg-mock": "^3.14.0",
+    "eslint": "^4.11.0",
+    "eslint-config-egg": "^6.0.0",
+    "webstorm-disable-index": "^1.2.0"
+  },
+  "engines": {
+    "node": ">=8.9.0"
+  },
+  "scripts": {
+    "start": "egg-scripts start --daemon --title=egg-server-server",
+    "stop": "egg-scripts stop --title=egg-server-server",
+    "dev": "egg-bin dev",
+    "debug": "egg-bin debug",
+    "test": "npm run lint -- --fix && npm run test-local",
+    "test-local": "egg-bin test",
+    "cov": "egg-bin cov",
+    "lint": "eslint .",
+    "ci": "npm run lint && npm run cov",
+    "autod": "autod"
+  },
+  "ci": {
+    "version": "8"
+  },
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "author": "",
+  "license": "MIT",
+  "postcss": {
+    "plugins": {
+      "postcss-aspect-ratio-mini": {},
+      "postcss-write-svg": {
+        "utf8": false
+      },
+      "postcss-cssnext": {},
+      "postcss-px-to-viewport": {
+        "viewportWidth": 375,
+        "viewportHeight": 667,
+        "unitPrecision": 3,
+        "viewportUnit": "vw",
+        "selectorBlackList": [
+          ".ignore",
+          ".hairlines"
+        ],
+        "minPixelValue": 1,
+        "mediaQuery": false
+      },
+      "cssnano": {
+        "cssnano-preset-advanced": {
+          "preset": "advanced",
+          "autoprefixer": false,
+          "postcss-zindex": false,
+          "zindex": false
+        }
+      }
+    }
+  }
+}

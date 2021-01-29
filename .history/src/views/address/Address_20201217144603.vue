@@ -1,0 +1,99 @@
+<template>
+  <div>
+    <van-nav-bar title="地址列表" :fixed="true" left-arrow @click-left="onClickLeft" :placeholder='true'/>
+    <div class='container'>
+      <div class='main' v-if="addressList.length === 0">
+        <div class="none">
+          暂无收货地址~~~
+        </div>
+      </div>
+      <div v-else class='contain'>
+        <div class='detail' v-for="(item,index) in addressList" :key="index">
+            <van-radio checked-color="#ee0a24" v-model="item.isDefault"></van-radio>
+            <div class='name'>{{`${item.name},${item.tel}`}}
+              <div class='address'>{{item.addressDetail}}</div>
+            </div>
+            <div class='edit'><van-icon name="edit" size="20px" @click="edition(item)"/></div>
+        </div>
+      </div>
+    </div>
+    <van-address-list
+      v-model="chosenAddressId"
+      default-tag-text="默认"
+      @add="onAdd"
+    />
+  </div>
+</template>
+
+<script>
+import { AddressList } from 'vant'
+export default {
+  name: '',
+  props:{},
+  data () {
+    return {
+      addressList:[],
+      chosenAddressId:'1',
+    }
+  },
+  components: {},
+  methods: {
+    onClickLeft(){
+      this.$router.go('-1')
+    },
+    getAddress(){
+      this.$api.GetAddress().then(res =>{
+        this.addressList = res.address
+        console.log(this.addressList)
+      }).catch(err =>{
+        console.log(err)
+      })
+    },
+    onAdd(){
+      this.$router.push('/editaddress')
+    },
+    edition(item){
+      console.log(item._id)
+      this.$router.push({
+        path:'/editaddress',
+        query: {id : item._id}
+      })
+    }
+  },
+  mounted() {
+    this.getAddress()
+  },
+  computed: {},
+  watch: {}
+}
+</script>
+
+<style lang="scss" scoped>
+.container{
+  width:100vw;
+  .main{
+    width:100vw;
+    height:50vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: gray;
+  }
+  .contain{
+    .detail{
+      display: flex;
+      width:100vw;
+      height:80px;
+      justify-content: space-around;
+      align-items: center;
+      .name{
+        width:70vw;
+      };
+      .address{
+        width:70vw;
+        color: gray;
+      }
+    }
+  }
+}
+</style>
